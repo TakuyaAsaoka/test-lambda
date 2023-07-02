@@ -1,7 +1,5 @@
 const AWS = require('aws-sdk');
 // 他の必要なモジュールのインポート
-const express = require('express');
-const app = express();
 const knex = require('./knex.js');
 
 // Lambda関数のエントリーポイント
@@ -14,17 +12,13 @@ exports.handler = async (event, context) => {
     // リクエストメソッドの識別
     const method = event.httpMethod;
     console.log('method: ', method);
-    console.log('method', method);
 
     // エンドポイントごとの処理を分岐
     switch (path) {
-      case '/api/favorites':
-        switch (method) {
-          case 'GET':
-            return getFavorites(event, context);
-        }
+      case '/api/endpoint1':
+        return `endpoint1 path:${path} method:${method}`;
       case '/api/endpoint2':
-        return handleEndpoint2(event, context);
+        return `endpoint2 path:${path} method:${method}`;
       // 他のエンドポイントの処理を追加
       default:
         return {
